@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Networks Security – Final Exam Prep</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #0a0e1a;
+  --bg2: #0f1528;
+  --bg3: #151c35;
+  --card: #111827;
+  --card2: #1a2340;
+  --border: #1e2d4a;
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --accent4: #f59e0b;
+  --danger: #ef4444;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --correct: #10b981;
+  --wrong: #ef4444;
+  --glow: 0 0 20px rgba(0,212,255,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND EFFECT */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    radial-gradient(ellipse at 20% 10%, rgba(124,58,237,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(0,212,255,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(16,185,129,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 3px; }
+
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,14,26,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+.search-wrap {
+  position: relative; flex: 1; max-width: 320px;
+}
+.search-wrap input {
+  width: 100%; padding: 8px 36px 8px 14px;
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-size: 0.85rem;
+  outline: none; font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+}
+.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap .si {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--text3); font-size: 0.9rem;
+}
+
+/* PROGRESS BAR */
+.progress-bar-wrap {
+  display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text2);
+}
+.progress-bar-wrap .pb {
+  width: 80px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+}
+.progress-bar-wrap .pb-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 3px; transition: width 0.4s;
+}
+
+/* NAVIGATION */
+nav {
+  display: flex; gap: 6px; padding: 12px 24px; overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2); position: sticky; top: 61px; z-index: 99;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+
+nav button {
+  white-space: nowrap; padding: 8px 16px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text2); cursor: pointer; font-size: 0.82rem;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+}
+nav button:hover { border-color: var(--accent); color: var(--accent); }
+nav button.active {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  border-color: transparent; color: #fff;
+  box-shadow: var(--glow);
+}
+
+/* MAIN */
+main { padding: 24px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+section { display: none; animation: fadeIn 0.4s ease; }
+section.active { display: block; }
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+/* SECTION HEADER */
+.sec-hdr {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.sec-hdr .icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+.sec-hdr h2 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; }
+.sec-hdr p { font-size: 0.85rem; color: var(--text2); margin-top: 2px; }
+
+/* CARDS */
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 20px; margin-bottom: 16px; transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--accent2); transform: translateY(-1px); }
+
+.q-num {
+  display: inline-block; background: var(--accent2); color: #fff;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px; margin-bottom: 10px;
+}
+.q-text { font-size: 0.97rem; font-weight: 500; line-height: 1.6; margin-bottom: 14px; }
+
+/* OPTIONS */
+.options { display: grid; gap: 8px; }
+.opt {
+  padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg3); cursor: pointer; font-size: 0.9rem;
+  transition: all 0.2s; display: flex; align-items: center; gap: 10px;
+  user-select: none;
+}
+.opt:hover { border-color: var(--accent); background: var(--card2); }
+.opt.selected { border-color: var(--accent2); background: rgba(124,58,237,0.15); }
+.opt.correct { border-color: var(--correct); background: rgba(16,185,129,0.12); color: var(--correct); }
+.opt.wrong { border-color: var(--wrong); background: rgba(239,68,68,0.12); color: var(--wrong); }
+.opt-letter {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--border); color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.opt.correct .opt-letter { background: var(--correct); color: #fff; }
+.opt.wrong .opt-letter { background: var(--wrong); color: #fff; }
+
+/* EXPLANATION */
+.explanation {
+  display: none; margin-top: 12px; padding: 12px 14px;
+  background: rgba(0,212,255,0.06); border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0; font-size: 0.88rem; color: var(--text2); line-height: 1.6;
+}
+.explanation.show { display: block; animation: fadeIn 0.3s; }
+.explanation strong { color: var(--accent); }
+
+/* BTNS */
+.btn {
+  padding: 9px 18px; border-radius: 8px; border: none;
+  cursor: pointer; font-size: 0.85rem; font-weight: 600;
+  font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff; box-shadow: var(--glow);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(0,212,255,0.4); }
+.btn-outline {
+  background: transparent; border: 1px solid var(--border); color: var(--text2);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-green { background: var(--correct); color: #fff; }
+.btn-green:hover { background: #059669; }
+.btn-danger { background: var(--danger); color: #fff; }
+
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+/* SCORE */
+.score-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700;
+  background: var(--card2); border: 1px solid var(--border); color: var(--accent);
+}
+
+/* TRUE/FALSE */
+.tf-card { position: relative; }
+.tf-btns { display: flex; gap: 8px; margin-top: 10px; }
+.tf-btn {
+  flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg3); cursor: pointer; font-weight: 700; font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif; transition: all 0.2s; color: var(--text);
+}
+.tf-btn.t:hover { border-color: var(--correct); color: var(--correct); }
+.tf-btn.f:hover { border-color: var(--wrong); color: var(--wrong); }
+.tf-btn.correct { background: rgba(16,185,129,0.15); border-color: var(--correct); color: var(--correct); }
+.tf-btn.wrong { background: rgba(239,68,68,0.12); border-color: var(--wrong); color: var(--wrong); }
+
+/* PROBLEM SOLVING */
+.formula-box {
+  background: var(--bg3); border: 1px solid var(--accent2);
+  border-radius: 10px; padding: 14px 18px; margin: 12px 0;
+  font-family: 'Space Mono', monospace; font-size: 0.88rem;
+  color: var(--accent); line-height: 1.8;
+}
+.step {
+  display: flex; gap: 12px; margin: 10px 0; align-items: flex-start;
+}
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--accent2);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700;
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-content { flex: 1; font-size: 0.9rem; line-height: 1.7; }
+.step-content code {
+  background: var(--bg3); padding: 1px 6px; border-radius: 4px;
+  font-family: 'Space Mono', monospace; font-size: 0.83rem; color: var(--accent);
+}
+
+.solution-reveal { display: none; margin-top: 14px; }
+.solution-reveal.show { display: block; animation: fadeIn 0.3s; }
+
+/* TABLE */
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 0.88rem;
+}
+th {
+  background: var(--card2); padding: 10px 14px; text-align: left;
+  border: 1px solid var(--border); font-family: 'Space Mono', monospace;
+  font-size: 0.78rem; color: var(--accent); letter-spacing: 0.05em;
+}
+td {
+  padding: 9px 14px; border: 1px solid var(--border); color: var(--text2);
+  vertical-align: top; line-height: 1.5;
+}
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.hl { color: var(--accent); font-weight: 600; }
+
+/* THEORY */
+.theory-card { border-left: 3px solid var(--accent2); }
+.theory-card h4 { color: var(--accent); font-size: 0.95rem; margin-bottom: 8px; }
+.theory-answer {
+  display: none; margin-top: 10px; padding-top: 10px;
+  border-top: 1px dashed var(--border); font-size: 0.9rem;
+  color: var(--text2); line-height: 1.7;
+}
+.theory-answer.show { display: block; animation: fadeIn 0.3s; }
+.theory-answer ul { padding-left: 18px; }
+.theory-answer li { margin-bottom: 5px; }
+
+/* QUICK REVISION */
+.formula-chip {
+  display: inline-block; background: var(--bg3); border: 1px solid var(--accent);
+  border-radius: 6px; padding: 4px 10px; margin: 4px;
+  font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--accent);
+}
+.key-note {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+}
+.key-note:last-child { border-bottom: none; }
+.key-note .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+.tag {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 0.72rem; font-weight: 700; margin-left: 6px; vertical-align: middle;
+}
+.tag-red { background: rgba(239,68,68,0.2); color: var(--wrong); }
+.tag-green { background: rgba(16,185,129,0.2); color: var(--correct); }
+.tag-blue { background: rgba(0,212,255,0.15); color: var(--accent); }
+.tag-purple { background: rgba(124,58,237,0.2); color: #a78bfa; }
+
+/* EXAM SECTION */
+.exam-header {
+  background: linear-gradient(135deg, var(--bg2), var(--card2));
+  border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+  margin-bottom: 24px; text-align: center;
+}
+.exam-header h2 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; }
+.exam-header p { color: var(--text2); margin-top: 6px; }
+.exam-meta { display: flex; justify-content: center; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+.exam-meta-item { text-align: center; }
+.exam-meta-item .val {
+  font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--accent);
+}
+.exam-meta-item .lbl { font-size: 0.75rem; color: var(--text3); margin-top: 2px; }
+
+#timer {
+  font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700;
+  color: var(--accent4); letter-spacing: 0.1em;
+  padding: 10px 20px; background: var(--card2); border-radius: 10px;
+  border: 1px solid var(--accent4); display: inline-block; margin-top: 10px;
+}
+#timer.urgent { color: var(--danger); border-color: var(--danger); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+.exam-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+
+/* SCORE SUMMARY */
+.score-summary {
+  background: var(--card2); border: 1px solid var(--border); border-radius: 14px;
+  padding: 24px; text-align: center; display: none;
+}
+.score-summary.show { display: block; animation: fadeIn 0.5s; }
+.big-score {
+  font-family: 'Space Mono', monospace; font-size: 3.5rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.score-breakdown { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+.score-item { text-align: center; padding: 12px 20px; background: var(--bg3); border-radius: 10px; min-width: 90px; }
+.score-item .sv { font-family: 'Space Mono', monospace; font-size: 1.3rem; font-weight: 700; }
+.score-item .sl { font-size: 0.75rem; color: var(--text3); margin-top: 3px; }
+
+/* ANSWER KEY */
+.answer-key {
+  display: none; background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px; margin-top: 20px;
+}
+.answer-key.show { display: block; animation: fadeIn 0.4s; }
+.answer-key h3 { font-family: 'Syne', sans-serif; margin-bottom: 14px; color: var(--accent); }
+.ak-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+.ak-item {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px; text-align: center; font-size: 0.8rem;
+}
+.ak-item .qn { color: var(--text3); font-size: 0.7rem; }
+.ak-item .ans { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--accent); }
+
+/* GRID LAYOUTS */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:700px) { .two-col { grid-template-columns: 1fr; } }
+
+/* SEARCH HIGHLIGHT */
+.search-hl { background: rgba(245,158,11,0.3); border-radius: 2px; }
+.hidden-q { display: none !important; }
+
+/* PRINT */
+@media print {
+  header, nav, .btn, .exam-controls, .btn-row { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card { border: 1px solid #ccc; page-break-inside: avoid; }
+}
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 28px; color: var(--text3); font-size: 0.82rem;
+  border-top: 1px solid var(--border); margin-top: 40px;
+  font-family: 'Space Mono', monospace; letter-spacing: 0.05em;
+}
+footer span { color: var(--accent); font-weight: 700; }
+
+/* CHIP */
+.chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+  background: var(--card2); border: 1px solid var(--border); color: var(--text2);
+}
+
+/* SECTION DIVIDER */
+.sdiv {
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--accent2); margin: 24px 0 12px; padding: 8px 14px;
+  border-left: 3px solid var(--accent2); background: rgba(124,58,237,0.07);
+  border-radius: 0 8px 8px 0;
+}
+
+/* NOTIFICATION TOAST */
+.toast {
+  position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 18px;
+  font-size: 0.88rem; color: var(--text); max-width: 280px;
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.toast.show { transform: none; opacity: 1; }
+
+/* GLOBAL TOGGLE ALL */
+.global-toggle-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">🔐 MOHAMMED MUSLIM </div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search questions..." oninput="doSearch(this.value)">
+    <span class="si">🔍</span>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="pb"><div class="pb-fill" id="progressFill" style="width:0%"></div></div>
+    <span id="progressText">0%</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <button class="active" onclick="showSection('mcq')">📝 MCQ</button>
+  <button onclick="showSection('tf')">✅ True/False</button>
+  <button onclick="showSection('ps')">🧮 Problem Solving</button>
+  <button onclick="showSection('theory')">📖 Theory</button>
+  <button onclick="showSection('revision')">⚡ Quick Revision</button>
+  <button onclick="showSection('exam')">🏆 Final Exam</button>
+</nav>
+
+<main>
+
+<!-- ============================================================ MCQ SECTION ============================================================ -->
+<section id="mcq" class="active">
+  <div class="sec-hdr">
+    <div class="icon" style="background:rgba(124,58,237,0.2);">📝</div>
+    <div>
+      <h2>Multiple Choice Questions</h2>
+      <p>40 questions covering all lectures — click an option to answer</p>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+      <span class="score-badge" id="mcqScore">Score: 0/0</span>
+    </div>
+  </div>
+  <div class="global-toggle-row">
+    <button class="btn btn-outline" onclick="toggleAllExplanations('mcq-container')">💡 Show/Hide All Explanations</button>
+    <button class="btn btn-outline" onclick="resetSection('mcq-container','mcqScore')">🔄 Reset</button>
+  </div>
+  <div id="mcq-container"></div>
+</section>
+
+<!-- ============================================================ T/F SECTION ============================================================ -->
+<section id="tf">
+  <div class="sec-hdr">
+    <div class="icon" style="background:rgba(16,185,129,0.2);">✅</div>
+    <div>
+      <h2>True / False</h2>
+      <p>25 statements — decide True or False</p>
+    </div>
+    <span class="score-badge" id="tfScore" style="margin-left:auto;">Score: 0/0</span>
+  </div>
+  <div class="global-toggle-row">
+    <button class="btn btn-outline" onclick="toggleAllExplanations('tf-container')">💡 Show/Hide All Explanations</button>
+    <button class="btn btn-outline" onclick="resetTF()">🔄 Reset</button>
+  </div>
+  <div id="tf-container"></div>
+</section>
+
+<!-- ============================================================ PROBLEM SOLVING ============================================================ -->
+<section id="ps">
+  <div class="sec-hdr">
+    <div class="icon" style="background:rgba(0,212,255,0.15);">🧮</div>
+    <div>
+      <h2>Problem Solving</h2>
+      <p>Step-by-step mathematical problems with formulas</p>
+    </div>
+  </div>
+  <div id="ps-container"></div>
+</section>
+
+<!-- ============================================================ THEORY ============================================================ -->
+<section id="theory">
+  <div class="sec-hdr">
+    <div class="icon" style="background:rgba(245,158,11,0.15);">📖</div>
+    <div>
+      <h2>Theory & Explanation</h2>
+      <p>Definitions, comparisons and model answers</p>
+    </div>
+  </div>
+  <div class="global-toggle-row">
+    <button class="btn btn-outline" onclick="toggleAllAnswers()">📋 Show/Hide All Answers</button>
+  </div>
+  <div id="theory-container"></div>
+</section>
+
+<!-- ============================================================ QUICK REVISION ============================================================ -->
+<section id="revision">
+  <div class="sec-hdr">
+    <div class="icon" style="background:rgba(239,68,68,0.15);">⚡</div>
+    <div>
+      <h2>Quick Revision</h2>
+      <p>Key formulas, notes, and exam-frequent concepts</p>
+    </div>
+  </div>
+  <div id="revision-container"></div>
+</section>
+
+<!-- ============================================================ FINAL EXAM ============================================================ -->
+<section id="exam">
+  <div class="exam-header">
+    <h2>🏆 Full Final Exam</h2>
+    <p>Social Networks Security — Comprehensive Mock Exam</p>
+    <div class="exam-meta">
+      <div class="exam-meta-item"><div class="val">60</div><div class="lbl">Minutes</div></div>
+      <div class="exam-meta-item"><div class="val">50</div><div class="lbl">Marks</div></div>
+      <div class="exam-meta-item"><div class="val">3</div><div class="lbl">Sections</div></div>
+    </div>
+    <div id="timer">60:00</div>
+  </div>
+  <div class="exam-controls">
+    <button class="btn btn-primary" id="startExamBtn" onclick="startExam()">▶ Start Exam</button>
+    <button class="btn btn-outline" onclick="submitExam()" id="submitExamBtn" style="display:none;">📩 Submit Exam</button>
+    <button class="btn btn-outline" onclick="window.print()">🖨️ Print</button>
+  </div>
+  <div id="score-summary" class="score-summary">
+    <div class="big-score" id="finalScore">0/50</div>
+    <p style="color:var(--text2);margin-top:6px;">Final Exam Result</p>
+    <div class="score-breakdown" id="scoreBreakdown"></div>
+    <div class="btn-row" style="justify-content:center;margin-top:16px;">
+      <button class="btn btn-primary" onclick="showAnswerKey()">📋 View Answer Key</button>
+      <button class="btn btn-outline" onclick="resetExam()">🔄 Retake Exam</button>
+    </div>
+  </div>
+  <div id="answer-key" class="answer-key"></div>
+  <div id="exam-container"></div>
+</section>
+
+</main>
+
+<footer>Developed by <span>MOHAMMED MUSLIM</span> &nbsp;|&nbsp; Social Networks Security — Final Exam Preparation</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const MCQ_DATA = [
+  // LECTURE 1 - INTRO
+  {q:"What is the primary definition of 'Social Network Security'?",opts:["Using social media only for professional purposes","Practices for protecting user data and privacy on social media from threats and breaches","Blocking all users from posting content","Making social media accessible without passwords"],correct:1,exp:"Social network security refers to the important practices for protecting user data and privacy on social media platforms from threats and breaches."},
+  {q:"Which of the following is classified as a 'Media Sharing Network'?",opts:["LinkedIn","Facebook","TikTok and YouTube","X (Twitter)"],correct:2,exp:"TikTok and YouTube are Media Sharing Networks focused on video content, while LinkedIn is professional and Facebook is a social connection platform."},
+  {q:"Which type of social network is Reddit best classified as?",opts:["Professional Network","Media Sharing Network","Community-based Platform","Microblogging Service"],correct:2,exp:"Reddit and Discord are Community-based platforms that facilitate focused discussions around specific topics."},
+  {q:"What are the three main categories in the definition of Social Network Security?",opts:["Definition of Security, Types of Threats, Preventive Measures","Users, Devices, Applications","Hacking, Phishing, Identity theft","Platform, Content, Interaction"],correct:0,exp:"Social network security is defined through: (1) Definition of Security, (2) Types of Threats like hacking and phishing, and (3) Preventive Measures like encryption and 2FA."},
+  {q:"Which security procedure involves keeping apps and devices updated with the latest patches?",opts:["Strong Passwords","Privacy Settings","Regular Updates","Monitoring Account Activity"],correct:2,exp:"Regular Updates ensure devices and apps have the latest security patches, protecting against vulnerabilities that cybercriminals exploit."},
+
+  // LECTURE 2 - DATA & PLATFORMS
+  {q:"What is OSINT?",opts:["A type of malware","Intelligence produced by collecting, evaluating and analyzing publicly available information","A social media platform","A password hashing algorithm"],correct:1,exp:"OSINT (Open Source Intelligence) is defined as intelligence produced by collecting, evaluating and analyzing publicly available information with the purpose of answering a specific intelligence question."},
+  {q:"Which social media activity is MOST revealing to advertising algorithms according to the lecture?",opts:["Posting a public status update","Liking five posts from a business","Sending a private message","Watching a 30-second video on 'For You' without liking"],correct:3,exp:"'Dwell time' — simply watching without interacting — is the most powerful behavioral signal to algorithms because it reveals genuine interest that cannot be faked, building a behavioral profile more accurate than stated preferences."},
+  {q:"What does EXIF data stand for?",opts:["Extended Image Format","Exchangeable Image File Format","External Index File Format","Encrypted Image Framework"],correct:1,exp:"EXIF stands for Exchangeable Image File Format. It contains embedded metadata including GPS coordinates, timestamp, camera model, and device information."},
+  {q:"Which of the following is NOT a type of data shared on social media as described in 'The Gold Mine'?",opts:["User-Generated Content","Behavioral Data","Cryptocurrency Wallet Data","Device & Metadata"],correct:2,exp:"The six types are: User-Generated Content, Personal Information (PII), Behavioral Data, Location Data, Social Graph & Contacts, and Device & Metadata. Cryptocurrency wallet data is not listed."},
+  {q:"What visual technique can be used to determine the exact date and time a photo was taken without EXIF data?",opts:["Color grading analysis","Shadow Analysis (Chronolocation)","Font recognition","License plate scanning"],correct:1,exp:"Shadow Analysis (Chronolocation) involves analyzing the angle and length of shadows using tools like SunCalc to determine the exact date and time a photo was taken."},
+  {q:"What is 'juice jacking'?",opts:["Hacking juice bar payment systems","Installing malware via a malicious USB/charging cable at public stations","Stealing Wi-Fi passwords","A type of SQL injection"],correct:1,exp:"Juice jacking occurs when malware is installed on a device via a malicious USB charging cable, typically at public 'free charging stations'."},
+  {q:"A Man-in-the-Middle (MITM) attack on café Wi-Fi can be prevented by using:",opts:["Antivirus software","A VPN","Two-factor authentication","A strong password on the café network"],correct:1,exp:"A VPN (Virtual Private Network) encrypts traffic and prevents a Man-in-the-Middle attacker from intercepting communications on public Wi-Fi."},
+  {q:"PII stands for:",opts:["Public Internet Information","Personally Identifiable Information","Private IP Interface","Platform Indexed Intelligence"],correct:1,exp:"PII stands for Personally Identifiable Information, which includes name, email, phone number, birthday, and workplace — data that can uniquely identify a person."},
+  {q:"Which tool mentioned in the lecture can use a face from a photo to find every other online instance of that person?",opts:["SunCalc","PimEyes or Yandex","Google Maps","Shodan"],correct:1,exp:"Tools like PimEyes or Yandex can perform reverse facial recognition — taking a face from a casual photo and finding every other instance of that person online, effectively de-anonymizing them."},
+
+  // LECTURE 3 - THREATS
+  {q:"Which of the following is a correct description of a 'Sybil Attack'?",opts:["Attacking a system by overloading it with requests","Creating multiple fake accounts to propagate in a network and gain social trust","Stealing user passwords through phishing","Infecting posts with malware"],correct:1,exp:"A Sybil Attack involves fake account propagation — creating multiple fake profiles to infiltrate a social network and build inherited social trust through the 'First Hop' and 'Second Hop' mechanism."},
+  {q:"In a Sybil attack, what is the 'Second Hop'?",opts:["The original fake account","The direct friends of the fake account","Friends of the direct friends — where inherited social trust is gained","The platform's detection algorithm"],correct:2,exp:"The Second Hop (Friends of Friends) is the most dangerous phase. Here the fake account gains 'Inherited Social Trust' because targets see a mutual friend from the First Hop, making them more likely to accept."},
+  {q:"What does the 'Clustering Coefficient' measure in detecting fake networks?",opts:["The number of followers an account has","Whether a user's friends are also friends with each other (cross-links)","The speed of content spread","The geographic distribution of accounts"],correct:1,exp:"The Clustering Coefficient measures whether friends within a network know each other. Real social circles have high clustering (friends are friends with each other), while fake networks lack these cross-links."},
+  {q:"What type of malware locks user devices until payment is made?",opts:["Spyware","Ransomware","Adware","Rootkit"],correct:1,exp:"Ransomware is malicious software that locks user devices, allowing attackers to demand payment for restoring access. Social media is frequently used to distribute ransomware links."},
+  {q:"What is 'Credential Stuffing'?",opts:["Creating a new password for every site","Using stolen credentials from one site to access accounts on another site","Generating complex passwords automatically","Storing passwords in a browser"],correct:1,exp:"Credential Stuffing exploits password reuse — attackers take credentials stolen from one breached website and try them on other platforms, knowing many users reuse passwords."},
+  {q:"Social media fingerprint analysis involves identifying users based on:",opts:["Their physical fingerprints submitted to the platform","Device configurations, browsing habits, behavioral patterns, and metadata","Only their username and profile picture","Their email address and phone number"],correct:1,exp:"Social media fingerprint analysis tracks and profiles users based on unique continuous data effects across platforms — including device configurations, browsing habits, behavioral patterns, and metadata like timestamps and location."},
+
+  // LECTURE 4 - PAGERANK/TRUSTRANK
+  {q:"What is PageRank fundamentally?",opts:["A social media popularity metric","A link analysis algorithm that assigns numerical weight to nodes to measure relative importance","A type of encryption algorithm","A user authentication system"],correct:1,exp:"PageRank is a link analysis algorithm that assigns a numerical weight to each node in a hyperlinked graph (like the Web) to measure its relative importance based on inbound links."},
+  {q:"In the PageRank formula, what does the damping factor 'd' represent?",opts:["The total number of pages","The number of outbound links","The probability that a random surfer continues clicking links rather than jumping to a new page","The number of seed pages"],correct:2,exp:"The damping factor d (usually 0.85) represents the probability that a random surfer continues following links. A value of 0.85 means there's an 85% chance of following a link and a 15% chance of teleporting randomly."},
+  {q:"What is the key difference between PageRank and TrustRank?",opts:["PageRank uses links, TrustRank uses user ratings","PageRank measures importance; TrustRank biases the random walk toward trusted seed pages to measure trustworthiness","PageRank only works on social networks","TrustRank only counts external links"],correct:1,exp:"PageRank measures importance from all pages. TrustRank modifies this so the teleport set is only a set of manually selected trusted seed pages, making trust decay as you move away from those seeds."},
+  {q:"In the TrustRank algorithm, where does the 'random browser' always teleport back to?",opts:["Any random page on the web","The most recently visited page","A page from the trusted seed set S","The page with the highest PageRank"],correct:2,exp:"In TrustRank, teleportation is restricted to the trusted seed set S, ensuring that trust flows from manually verified trustworthy sources rather than randomly across the entire web."},
+  {q:"What is L(q) in the PageRank/TrustRank formula?",opts:["The trust score of page q","The number of inbound links to page q","The number of outbound links from page q","The damping factor"],correct:2,exp:"L(q) represents the number of outbound (outgoing) links from page q. The PageRank contribution of q to its linked pages is PR(q)/L(q), so pages with more outbound links share less rank per link."},
+  {q:"In the TrustRank first iteration example (5-page graph, S={A}, d=0.85), what is T1(B)?",opts:["0.15","0.425","0","0.85"],correct:1,exp:"T1(B) = 0 + 0.85 × T0(A)/L(A) = 0.85 × 1/2 = 0.425. Page B receives trust directly from seed A which has 2 outbound links."},
+  {q:"Why do trust scores in TrustRank sum to approximately 1?",opts:["Because there are exactly 100 pages","Because the trust equation is a probability distribution over all pages","Because the damping factor is 0.85","Because seed pages always have trust = 1"],correct:1,exp:"The TrustRank equation is formulated as a probability distribution over the set of pages, ensuring the total trust is conserved and sums to exactly 1 across all pages."},
+  {q:"In a TrustRank graph, pages D and E form a loop (D→E→D) and have no connection to seed A. Their trust score after early iterations is:",opts:["Very high because they share trust between each other","0, because no trust flows from the seed set to them initially","Equal to the seed page A","0.5 each"],correct:1,exp:"Pages disconnected from the seed set receive 0 trust in early iterations because trust only flows from seed pages through outbound links. Without a path from A, D and E have no trust."},
+
+  // LECTURE 5 - FAKE ACCOUNTS / PHISHING
+  {q:"What is the Levenshtein distance?",opts:["The number of followers lost after a hack","The minimum number of single-character edits (insertions, deletions, substitutions) to transform one string into another","The distance between two servers","The number of hops in a Sybil attack"],correct:1,exp:"Levenshtein distance calculates the minimum number of single-character edits needed to transform one string into another — used in phishing detection to flag domain names that are suspiciously similar to legitimate ones."},
+  {q:"What is the Levenshtein distance between 'facebook' and 'faceb00k'?",opts:["0","1","2","8"],correct:2,exp:"'facebook' vs 'faceb00k': two substitutions are made (o→0 twice), so the Levenshtein distance = 2."},
+  {q:"What similarity percentage does a Levenshtein distance of 2 between 'facebook' (length 8) and 'faceb00k' (length 8) yield?",opts:["25%","50%","75%","100%"],correct:2,exp:"Similarity = 1 - D(S,T)/max(|S|,|T|) = 1 - 2/8 = 1 - 0.25 = 0.75 = 75%. A similarity above 70% threshold is flagged as potentially dangerous in cybersecurity contexts."},
+  {q:"What is 'Malvertising'?",opts:["Malware hidden in software updates","Fake ads promoting exclusive software or prizes used to deliver malware","Email spam campaigns","Social engineering through phone calls"],correct:1,exp:"Malvertising involves fake advertisements promoting exclusive software, prizes, or offers, designed to trick users into clicking links that lead to malicious websites."},
+  {q:"During which stage of a scam network's lifecycle does the fake account build a 'Trust Score' with platform algorithms?",opts:["Creation","Incubation","Expansion","Execution"],correct:1,exp:"During the Incubation stage, the fake account posts generic content (weather, quotes) to appear human and build trust with the platform's detection algorithms before launching the actual attack."},
+  {q:"Phishing attacks use domain names with small changes. This technique is detected by:",opts:["GPS triangulation","Levenshtein distance calculation","PageRank analysis","Clustering coefficient"],correct:1,exp:"Levenshtein distance helps automated systems compare domain names to known legitimate ones, flagging domains with small edit distances (e.g., faceb00k.com vs facebook.com) as potential phishing attempts."},
+  {q:"What does a 'Source Node' represent in a Sybil attack tree?",opts:["A real user who has many followers","The primary fake account controlled by the attacker, designed to appear trustworthy","The platform's security team","A legitimate verified account"],correct:1,exp:"The Source Node is the primary fake account controlled by the attacker or bot. Its goal is not just to gain followers but to build a network that appears trustworthy enough to deceive detection algorithms."},
+  {q:"Which of the following IS a 'wealth signal' that makes a person a target for social engineering from a photo?",opts:["Smiling in a photo","High-end smartphone or designer clothing","Having many friends in a photo","Posting frequently"],correct:1,exp:"Lifestyle indicators like high-end smartphones, specific watch brands, or designer clothing items are 'wealth signals' visible in photos that can make individuals targets for social engineering attacks."},
+];
+
+const TF_DATA = [
+  {s:"OSINT (Open Source Intelligence) involves collecting classified government documents.",correct:false,exp:"OSINT uses PUBLICLY available information only. It explicitly excludes classified or secret sources — that would be other intelligence categories."},
+  {s:"The damping factor 'd' in PageRank is typically set to 0.85.",correct:true,exp:"The standard damping factor is 0.85, representing an 85% probability that a random surfer follows a link rather than jumping to a random page."},
+  {s:"In TrustRank, the random browser can teleport to any page on the web.",correct:false,exp:"FALSE. In TrustRank, the teleport set is ONLY the trusted seed pages (S). The random browser always teleports back to a seed page, never to a randomly selected page."},
+  {s:"EXIF data embedded in a photo can contain GPS coordinates, timestamp, and device model.",correct:true,exp:"EXIF (Exchangeable Image File Format) stores embedded metadata including exact GPS coordinates, date/time, camera make/model, and camera settings."},
+  {s:"The Levenshtein distance between 'fly' and 'f1y' is 1.",correct:true,exp:"Only one substitution is needed: 'l' → '1'. Therefore the Levenshtein distance = 1, giving a similarity of 1 - 1/3 = 66.67%."},
+  {s:"In a Sybil attack, the 'First Hop' consists of friends of friends of the fake account.",correct:false,exp:"FALSE. The First Hop are DIRECT friends of the fake account. The Second Hop (friends of friends) is where inherited social trust is gained."},
+  {s:"Ransomware locks user devices and demands payment for access restoration.",correct:true,exp:"Ransomware is malicious software that encrypts/locks user devices or files and demands a ransom payment, often in cryptocurrency, for restoration."},
+  {s:"Credential stuffing works because many users use unique passwords on every platform.",correct:false,exp:"FALSE. Credential stuffing works precisely because many users REUSE the same passwords across multiple platforms. If passwords were always unique, the attack would fail."},
+  {s:"Shadow Analysis (Chronolocation) can determine the exact date and time a photo was taken using the angle and length of shadows.",correct:true,exp:"Using tools like SunCalc, investigators can analyze shadow angles and lengths in photos to calculate the precise date, time, and geographic position where the photo was taken."},
+  {s:"PageRank and TrustRank are identical algorithms.",correct:false,exp:"They share the same base formula but differ in the teleportation set. PageRank uses all pages as the teleport set; TrustRank restricts teleportation to a manually selected set of trusted seed pages."},
+  {s:"A high Clustering Coefficient in a social network indicates a fake account network.",correct:false,exp:"FALSE. HIGH clustering coefficient indicates REAL social networks (friends know each other). FAKE networks have LOW clustering because the fake connections don't know each other."},
+  {s:"PimEyes and Yandex can be used to find other online instances of a person using facial recognition.",correct:true,exp:"These tools perform reverse facial recognition, taking a face from one photo and finding every other instance of that person across the internet, effectively de-anonymizing individuals."},
+  {s:"The trust scores in TrustRank sum to exactly 1 because it is formulated as a probability distribution.",correct:true,exp:"The TrustRank equation is designed as a probability distribution over pages, which ensures trust is conserved and all values sum to 1."},
+  {s:"Malvertising involves spreading malware through seemingly legitimate social media posts.",correct:false,exp:"Malvertising specifically involves FAKE ADVERTISEMENTS (not general posts) that promote exclusive software or prizes, tricking users into clicking malicious links."},
+  {s:"In the TrustRank 5-page example, pages D and E (forming a loop disconnected from seed A) have T1 = 0.",correct:true,exp:"In the first iteration, D and E receive zero trust because no trust flows from seed A to them — their only incoming links are from B and E respectively, which start with T0=0."},
+  {s:"Using a VPN on public Wi-Fi protects against Man-in-the-Middle (MITM) attacks.",correct:true,exp:"A VPN encrypts all traffic between the device and the VPN server, preventing a MITM attacker on the same Wi-Fi network from intercepting or reading the communications."},
+  {s:"The Levenshtein distance similarity formula is: Similarity = 1 - D(S,T) / max(|S|,|T|).",correct:true,exp:"This formula converts the edit distance into a similarity score between 0 and 1. A distance of 0 gives 100% similarity; higher distances reduce the score proportionally."},
+  {s:"LinkedIn is classified as a 'Media Sharing Network' in the lecture.",correct:false,exp:"LinkedIn is classified as a 'Professional Network' focused on career development. TikTok and YouTube are Media Sharing Networks."},
+  {s:"Juice jacking is a threat that occurs when a device is charged at a malicious public USB charging station.",correct:true,exp:"Juice jacking is when malware is installed through a malicious USB/charging cable at public charging stations, compromising the device while it charges."},
+  {s:"In a Sybil attack, the incubation phase involves immediately sending phishing links after account creation.",correct:false,exp:"FALSE. During incubation, the fake account posts GENERIC, harmless content (quotes, weather) to build a trust score with platform algorithms. Malicious action happens in the much later Execution phase."},
+  {s:"The L(q) value in the PageRank formula represents the number of INBOUND links to page q.",correct:false,exp:"FALSE. L(q) is the number of OUTBOUND (outgoing) links FROM page q. The larger L(q) is, the less rank each linked page receives from q."},
+  {s:"Behavioral data collected by social media includes likes, shares, click patterns, time spent on content, and search history.",correct:true,exp:"Behavioral data is one of the six categories of data collected. It includes all user actions: likes, shares, clicks, time spent, search history — revealing interests and patterns."},
+  {s:"A photo with all EXIF data stripped is completely safe from geolocation analysis.",correct:false,exp:"FALSE. Even without EXIF data, advanced OSINT techniques (interior micro-markers, view from window, street signs, shadow analysis) can still geolocate a photo using only visual content."},
+  {s:"In the TrustRank formula, if a page p is NOT a seed, the indicator function 1(p∈S) = 0.",correct:true,exp:"The indicator function returns 1 only if page p is in the seed set S, and 0 otherwise. Non-seed pages gain all their trust from the link-following component, not the teleportation component."},
+  {s:"The PageRank of a large graph typically converges in 20-50 iterations.",correct:true,exp:"In practice, PageRank on large graphs converges in approximately 20-50 iterations as the teleportation and link-following probabilities stabilize to steady-state values."},
+];
+
+const PS_DATA = [
+  {
+    title: "TrustRank — 3-Page Graph (Exam A / B Style)",
+    prob: "Given the graph: Seed A → C → D → A (D also links back to A). Seed set S = {A}, damping factor d = 0.85. Compute T₁(p) for all pages and discuss the results.",
+    formula: "T(p) = (1-d) · [1(p∈S) / |S|] + d · Σ[T(q)/L(q)] for q∈Bp\nInitialization: T₀(A) = 1, T₀(C) = 0, T₀(D) = 0\nOutbound links: L(A) = 1 (→C), L(C) = 1 (→D), L(D) = 1 (→A)",
+    steps: [
+      {n:1,t:"Setup",c:"Seed S = {A}, |S| = 1. Initial: T₀(A) = 1, T₀(C) = 0, T₀(D) = 0. Outbound links: L(A)=1, L(C)=1, L(D)=1."},
+      {n:2,t:"Compute T₁(A)",c:"A is a seed. Inbound from D only.<br><code>T₁(A) = (1-0.85)·(1/1) + 0.85·(T₀(D)/L(D))</code><br><code>= 0.15·1 + 0.85·(0/1) = 0.15 + 0 = 0.15</code>"},
+      {n:3,t:"Compute T₁(C)",c:"C is NOT a seed. Inbound from A only.<br><code>T₁(C) = 0 + 0.85·(T₀(A)/L(A))</code><br><code>= 0.85·(1/1) = 0.85</code>"},
+      {n:4,t:"Compute T₁(D)",c:"D is NOT a seed. Inbound from C only.<br><code>T₁(D) = 0 + 0.85·(T₀(C)/L(C))</code><br><code>= 0.85·(0/1) = 0</code>"},
+      {n:5,t:"Verify Sum",c:"T₁(A) + T₁(C) + T₁(D) = 0.15 + 0.85 + 0 = <strong>1.0 ✓</strong>"},
+      {n:6,t:"Discussion",c:"C has the highest trust (0.85) because it directly receives trust from seed A. D has 0 trust because C had 0 trust in iteration 0. In subsequent iterations, trust will propagate: D will gain trust from C's growing score, and A will gain trust through D→A link."}
+    ],
+    table: {headers:["Page","Seed?","T₀","T₁","Discussion"],rows:[["A","✓ (seed)","1","0.15","Drops: only gets trust via D→A which is 0 in iter 0"],["C","✗","0","0.85","High: directly linked from seed A"],["D","✗","0","0","Isolated: C had 0 trust in iter 0"]]},
+  },
+  {
+    title: "Levenshtein Distance — 'fly' vs 'f1y'",
+    prob: "Compute the Levenshtein distance between S = 'fly' and T = 'f1y' (www.fly.com vs www.f1y.com). Then compute the similarity score.",
+    formula: "D[i][j] = max(i,j)  if min(i,j) = 0\nD[i][j] = min(D[i-1][j]+1, D[i][j-1]+1, D[i-1][j-1]+δ)  otherwise\nwhere δ = 0 if S[i]=T[j], else δ = 1\nSimilarity = 1 - D(S,T) / max(|S|,|T|)",
+    steps: [
+      {n:1,t:"Initialize",c:"S='fly' (len=3), T='f1y' (len=3). Create 4×4 matrix D. First row: 0,1,2,3. First column: 0,1,2,3."},
+      {n:2,t:"D[1][1]: S[1]=f, T[1]=f",c:"Characters equal → δ=0<br><code>Del: D[0][1]+1 = 1+1 = 2</code><br><code>Ins: D[1][0]+1 = 1+1 = 2</code><br><code>Sub: D[0][0]+0 = 0+0 = 0 ← MIN</code><br>D[1][1] = 0"},
+      {n:3,t:"D[1][2]: S[1]=f, T[2]=1",c:"Characters NOT equal → δ=1<br><code>Del: D[0][2]+1 = 2+1 = 3</code><br><code>Ins: D[1][1]+1 = 0+1 = 1 ← MIN</code><br><code>Sub: D[0][1]+1 = 1+1 = 2</code><br>D[1][2] = 1"},
+      {n:4,t:"D[2][2]: S[2]=l, T[2]=1",c:"Characters NOT equal (l≠1) → δ=1<br><code>Del: D[1][2]+1 = 1+1 = 2</code><br><code>Ins: D[2][1]+1 = 1+1 = 2</code><br><code>Sub: D[1][1]+1 = 0+1 = 1 ← MIN</code><br>D[2][2] = 1"},
+      {n:5,t:"D[3][3]: S[3]=y, T[3]=y",c:"Characters equal → δ=0<br><code>Del: D[2][3]+1 = 2+1 = 3</code><br><code>Ins: D[3][2]+1 = 2+1 = 3</code><br><code>Sub: D[2][2]+0 = 1+0 = 1 ← MIN</code><br>D[3][3] = 1"},
+      {n:6,t:"Final Result",c:"<strong>Levenshtein Distance = D[3][3] = 1</strong><br>Similarity = 1 - 1/max(3,3) = 1 - 1/3 = 1 - 0.333 = <strong>0.667 = 66.67%</strong><br>⚠️ 66.67% similarity is HIGH for short strings → flag as suspicious phishing domain!"}
+    ],
+    table:{headers:["","ε (j=0)","f (j=1)","1 (j=2)","y (j=3)"],rows:[["ε (i=0)","0","1","2","3"],["f (i=1)","1","0","1","2"],["l (i=2)","2","1","1","2"],["y (i=3)","3","2","2","1"]]},
+  },
+  {
+    title: "Levenshtein Distance — 'facebook' vs 'faceb00k'",
+    prob: "Compute the Levenshtein distance between S = 'facebook' and T = 'faceb00k'. Then compute the similarity and assess the threat level.",
+    formula: "S = facebook (length m = 8)\nT = faceb00k (length n = 8)\nSubstitutions needed: position 6: o→0, position 7: o→0\nLevenshtein Distance = 2\nSimilarity = 1 - D/max(|S|,|T|) = 1 - 2/8 = 0.75",
+    steps: [
+      {n:1,t:"Identify Differences",c:"Compare character by character:<br>f-a-c-e-b-<strong>o</strong>-<strong>o</strong>-k (facebook)<br>f-a-c-e-b-<strong>0</strong>-<strong>0</strong>-k (faceb00k)<br>Positions 6 and 7 differ: 'o' replaced with '0' (zero)."},
+      {n:2,t:"Calculate Distance",c:"Two substitutions are required → <code>Levenshtein Distance = 2</code>"},
+      {n:3,t:"Compute Similarity",c:"<code>Similarity = 1 - D(S,T) / max(|S|,|T|)</code><br><code>= 1 - 2/8 = 1 - 0.25 = 0.75</code><br><strong>Similarity Score = 75%</strong>"},
+      {n:4,t:"Security Assessment",c:"If threshold T > 0.7: the domain is considered DANGEROUS.<br>0.75 > 0.70 → ⚠️ <strong>BLOCK or WARN user!</strong><br>The domain would be flagged and either blocked by the security system or the user alerted about a potential phishing attempt."}
+    ],
+    table:{headers:["Metric","Value","Assessment"],rows:[["Levenshtein Distance","2","Only 2 character changes"],["Difference Ratio","25%","25% of characters differ"],["Similarity Score","75%","HIGH similarity"],["Threat Level","⚠️ DANGEROUS","Exceeds 70% threshold → block"]]},
+  },
+  {
+    title: "PageRank Calculation — 3-Page Network",
+    prob: "A simple 3-page web (A, B, C) with links: A→B, A→C, B→C, C→A. Using d=0.85 and N=3, compute one iteration of PageRank starting from PR⁰(p) = 1/3 for all pages.",
+    formula: "PR(p) = (1-d)/N + d · Σ[PR(q)/L(q)] for q∈Bp\nwhere d=0.85, N=3, Initial PR=1/3≈0.333\nL(A)=2, L(B)=1, L(C)=1",
+    steps:[
+      {n:1,t:"Setup",c:"d=0.85, N=3, (1-d)/N = 0.15/3 = 0.05. Initial PR for all = 1/3 ≈ 0.333. L(A)=2 (→B,C), L(B)=1 (→C), L(C)=1 (→A)."},
+      {n:2,t:"PR¹(A)",c:"Inbound to A: from C only.<br><code>PR¹(A) = 0.05 + 0.85×(PR(C)/L(C))</code><br><code>= 0.05 + 0.85×(0.333/1)</code><br><code>= 0.05 + 0.283 = 0.333</code>"},
+      {n:3,t:"PR¹(B)",c:"Inbound to B: from A only.<br><code>PR¹(B) = 0.05 + 0.85×(PR(A)/L(A))</code><br><code>= 0.05 + 0.85×(0.333/2)</code><br><code>= 0.05 + 0.142 = 0.192</code>"},
+      {n:4,t:"PR¹(C)",c:"Inbound to C: from A and B.<br><code>PR¹(C) = 0.05 + 0.85×(PR(A)/L(A) + PR(B)/L(B))</code><br><code>= 0.05 + 0.85×(0.333/2 + 0.333/1)</code><br><code>= 0.05 + 0.85×(0.167+0.333)</code><br><code>= 0.05 + 0.425 = 0.475</code>"},
+      {n:5,t:"Verify",c:"Sum = 0.333 + 0.192 + 0.475 = 1.0 ✓<br>C has highest PageRank because it receives links from BOTH A and B."}
+    ],
+    table:{headers:["Page","Inbound From","PR⁰","PR¹","Rank"],rows:[["A","C","0.333","0.333","2nd"],["B","A","0.333","0.192","3rd"],["C","A, B","0.333","0.475","1st"]]},
+  },
+];
+
+const THEORY_DATA = [
+  {q:"Define Social Network Security and explain its three pillars.",a:`<strong>Definition:</strong> Social network security refers to the important practices for protecting user data and privacy on social media platforms from threats and breaches.<br><br><strong>Three Pillars:</strong><ul><li><strong>Definition of Security:</strong> Protecting user data and privacy</li><li><strong>Types of Threats:</strong> Hacking, phishing, identity theft, data breaches — all aiming to exploit user information</li><li><strong>Preventive Measures:</strong> Encryption, secure passwords, two-factor authentication, user education</li></ul>`},
+  {q:"Compare PageRank and TrustRank. What problem does TrustRank solve?",a:`<strong>PageRank:</strong> Measures page importance based on inbound links. The random browser teleports to ANY page on the web. Vulnerable to manipulation by spam link farms.<br><br><strong>TrustRank:</strong> Modifies PageRank so the teleport set is ONLY manually selected trusted seed pages (S). Trust decays as it moves away from seeds — 'good pages link little to bad ones.'<br><br><strong>Problem Solved:</strong> PageRank can be manipulated by creating many pages that link to each other (link farms). TrustRank combats web spam by anchoring trust in verified seed pages, making manipulation much harder.`},
+  {q:"Explain a Sybil Attack in detail, including all three network layers.",a:`A Sybil attack involves fake account propagation on social networks.<br><br><strong>Layer 1 — Source Node (Fake Account):</strong> The primary attacker-controlled account. Goal: appear trustworthy to deceive detection algorithms.<br><br><strong>Layer 2 — First Hop (Direct Friends):</strong> Accounts that accept the fake account's request — 'follow-back' bots, other Sybil accounts for social proof, and deceived real users.<br><br><strong>Layer 3 — Second Hop (Friends of Friends):</strong> The critical phase where 'Inherited Social Trust' is gained. When second-hop users see a friend request, they see a 'Mutual Friend' from the First Hop and accept without suspicion.<br><br><strong>Detection Methods:</strong> Clustering coefficient analysis, expansion rate anomalies, short path length to many disparate groups.`},
+  {q:"What is OSINT? List and explain at least 4 pieces of intelligence that can be extracted from a single café photo.",a:`<strong>OSINT (Open Source Intelligence):</strong> Intelligence produced by collecting, evaluating and analyzing publicly available information to answer a specific intelligence question.<br><br><strong>Intelligence from a café photo:</strong><ul><li><strong>Identity (Biometric):</strong> Faces, tattoos, ear shapes → reverse image search reveals full name, social profiles, workplace</li><li><strong>Location (Visual GPS):</strong> Ornate lamps, wall maps, street signs visible through windows → can pinpoint specific neighborhood or establishment</li><li><strong>Timing (Chronolocation):</strong> Shadow angles analyzed with SunCalc → exact date and time of meeting</li><li><strong>Security Risks:</strong> Laptop screens (shoulder surfing), open bags, charging ports → company data exposure</li><li><strong>Lifestyle/Wealth Signals:</strong> High-end phones, designer items → targeting for social engineering</li><li><strong>Network Risks:</strong> Unsecured Wi-Fi MITM attacks, juice jacking via charging stations</li></ul>`},
+  {q:"Explain the six types of data collected by social media platforms (The Gold Mine).",a:`<ul><li><strong>User-Generated Content:</strong> Photos, videos, posts, comments — directly created by users</li><li><strong>Personal Information (PII):</strong> Name, email, phone number, birthday, workplace — profile fields</li><li><strong>Behavioral Data:</strong> Likes, shares, click patterns, time spent on content, search history — reveals interests</li><li><strong>Location Data:</strong> GPS coordinates from posts, IP addresses, check-ins — reveals physical movements</li><li><strong>Social Graph & Contacts:</strong> Friends/followers lists, imported address books — reveals relationships</li><li><strong>Device & Metadata:</strong> Phone type, OS, browser, information from other apps — reveals technical fingerprint</li></ul>Behavioral data (especially dwell time) is often the most valuable for advertisers because it reflects genuine interests rather than stated preferences.`},
+  {q:"Compare the four common Account Takeover methods and explain each.",a:`<ul><li><strong>Weak Passwords:</strong> Users use easily guessable passwords (birth dates, names). Solution: Complex passwords changed regularly.</li><li><strong>Credential Stuffing:</strong> Attackers use credentials stolen from one breached site on other platforms, exploiting password reuse. Solution: Unique passwords per site.</li><li><strong>Lack of 2FA:</strong> Without Two-Factor Authentication, knowing only the password is sufficient. Solution: Enable 2FA (SMS, authenticator app).</li><li><strong>Phishing:</strong> Fake login pages (often detected via Levenshtein distance) that steal credentials when users enter them. Solution: Always verify URLs, use password managers.</li></ul>`},
+  {q:"What is the Levenshtein Distance and how is it used in cybersecurity?",a:`<strong>Definition:</strong> Levenshtein distance calculates the minimum number of single-character edits (insertions, deletions, substitutions) needed to transform one string into another.<br><br><strong>Cybersecurity Use:</strong> Phishing attacks use domain names nearly identical to legitimate ones (faceb00k.com vs facebook.com). Automated systems compute the edit distance and similarity score:<br><br><code>Similarity = 1 - D(S,T) / max(|S|,|T|)</code><br><br>If similarity exceeds a threshold (e.g., 70%), the domain is flagged as a potential phishing attempt and either blocked or triggers a user warning. Distance of 2 for 'facebook' vs 'faceb00k' gives 75% similarity — above the 70% threshold, so it would be blocked.`},
+  {q:"Explain the three data privacy risks identified in the lecture.",a:`<ul><li><strong>Information Leakage:</strong> Users often voluntarily share personal information (birthday, location, employer) that can be exploited by malicious entities for social engineering, targeted phishing, or identity theft.</li><li><strong>Third-party Apps:</strong> Social platforms allow external apps to access user data. These apps may not have adequate security measures, potentially exposing user data to breaches or unauthorized sharing with advertisers.</li><li><strong>Insufficient Privacy Settings:</strong> Users frequently fail to adjust default privacy settings, leaving profiles, posts, and personal information visible to unintended audiences including data scrapers and malicious actors.</li></ul>`},
+  {q:"What is 'dwell time' and why is it the most revealing social media behavior for advertising algorithms?",a:`<strong>Dwell time</strong> refers to the amount of time a user spends viewing content (e.g., watching a 30-second video) without explicitly interacting (no like, comment, or share).<br><br><strong>Why it's most revealing:</strong><ul><li>It captures <em>genuine</em> interest — you cannot accidentally dwell on content</li><li>It reveals interests that users may not want to consciously acknowledge</li><li>It builds a behavioral profile based on actual attention rather than stated preferences</li><li>Platform algorithms use dwell time as the strongest signal to understand true interests</li><li>This data is more valuable to advertisers than explicit actions like likes</li></ul>This is why simply watching a TikTok 'For You' video is more revealing than posting publicly about a sports team.`},
+  {q:"Explain the lifecycle stages of a social media scam network.",a:`<table style='width:100%;border-collapse:collapse;font-size:0.85rem;'><tr style='background:var(--card2);'><th style='padding:8px;border:1px solid var(--border);color:var(--accent);'>Stage</th><th style='padding:8px;border:1px solid var(--border);color:var(--accent);'>Action</th><th style='padding:8px;border:1px solid var(--border);color:var(--accent);'>Security Context</th></tr><tr><td style='padding:8px;border:1px solid var(--border);'>Creation</td><td style='padding:8px;border:1px solid var(--border);'>Account registration using automated scripts (Bots)</td><td style='padding:8px;border:1px solid var(--border);'>Bypassing CAPTCHAs and SMS verification</td></tr><tr><td style='padding:8px;border:1px solid var(--border);'>Incubation</td><td style='padding:8px;border:1px solid var(--border);'>Posting generic content (weather, quotes)</td><td style='padding:8px;border:1px solid var(--border);'>Building a Trust Score with platform algorithms</td></tr><tr><td style='padding:8px;border:1px solid var(--border);'>Expansion</td><td style='padding:8px;border:1px solid var(--border);'>Sending requests to Bridge Accounts</td><td style='padding:8px;border:1px solid var(--border);'>Exploiting Mutual Friend trust</td></tr><tr><td style='padding:8px;border:1px solid var(--border);'>Execution</td><td style='padding:8px;border:1px solid var(--border);'>Launching phishing links, malware, misinformation</td><td style='padding:8px;border:1px solid var(--border);'>The malicious action phase</td></tr></table>`},
+];
+
+const REVISION_DATA = {
+  formulas:[
+    "PR(p) = (1-d)/N + d·Σ[PR(q)/L(q)] — PageRank",
+    "T(p) = (1-d)·[1(p∈S)/|S|] + d·Σ[T(q)/L(q)] — TrustRank",
+    "Similarity = 1 - D(S,T)/max(|S|,|T|) — Levenshtein Similarity",
+    "d = 0.85 (damping factor standard value)",
+    "Initial T₀: T(A)=1 for seed A, T=0 for all others",
+    "L(q) = number of OUTBOUND links from page q",
+    "Bp = set of pages that link INBOUND to page p",
+    "|S| = size of trusted seed set in TrustRank",
+    "δ = 0 if chars equal, else δ = 1 (in Levenshtein)",
+    "Levenshtein: D[i][j] = min(del+1, ins+1, sub+δ)",
+  ],
+  notes:[
+    {t:"TrustRank vs PageRank", c:"PageRank teleports to ANY page. TrustRank teleports ONLY to seed set S. This restricts trust flow to verified sources.", hot:true},
+    {t:"Dwell time = most revealing data", c:"Simply watching without interacting is the strongest signal for advertising algorithms — reveals genuine interest.", hot:true},
+    {t:"Sybil Attack stages", c:"Source Node → First Hop (direct) → Second Hop (inherited trust). Detection: clustering coefficient, expansion rate, path length.", hot:true},
+    {t:"EXIF data", c:"GPS, timestamp, device model embedded in photos. Many platforms strip it, but visual content (OSINT) can still geolocate.", hot:false},
+    {t:"Levenshtein threshold", c:"If Similarity > 0.7 (70%), domain is flagged as dangerous phishing attempt. facebook vs faceb00k = 75% → BLOCKED.", hot:true},
+    {t:"Sums always = 1", c:"Both PageRank and TrustRank values sum to 1 across all pages — they are probability distributions.", hot:false},
+    {t:"Types of malware on social media", c:"Infected posts, Ransomware (locks device), Spyware (hidden data collection) — all distributed through social media links.", hot:false},
+    {t:"Account takeover methods", c:"Weak passwords, Credential stuffing (reuse), Lack of 2FA, Phishing. All lead to unauthorized account access.", hot:false},
+    {t:"OSINT techniques for photos", c:"Advanced Geolocation (window view, interior markers), Biological fingerprinting (faces/tools like PimEyes), OPSEC leaks (screen content), Temporal analysis (shadows).", hot:true},
+    {t:"Fake account lifecycle", c:"Creation (bot registration) → Incubation (generic posts for trust score) → Expansion (bridge accounts) → Execution (attack phase).", hot:false},
+    {t:"6 data types collected", c:"User-Generated Content, PII, Behavioral Data, Location Data, Social Graph, Device & Metadata.", hot:false},
+    {t:"Clustering Coefficient", c:"HIGH = real network (friends know each other). LOW = fake network (no cross-links between connections).", hot:true},
+  ],
+  exam_tips:[
+    "For TrustRank problems: seeds start with T₀=1, all others start with T₀=0.",
+    "Always verify Levenshtein distance results: final answer = D[m][n] = bottom-right cell.",
+    "The similarity score formula can give a score between 0 (totally different) and 1 (identical).",
+    "When computing TrustRank, the (1-d)·(1/|S|) term is ONLY added for seed pages (1(p∈S)=1). Non-seeds get 0 from this term.",
+    "For Levenshtein matrix: first row = 0,1,2,3... | first column = 0,1,2,3...",
+    "In Sybil attack questions: Second Hop = Friends of Friends = where INHERITED SOCIAL TRUST is gained.",
+    "PageRank convergence takes 20-50 iterations on large graphs.",
+    "The damping factor d=0.85 means 85% probability of following a link, 15% of teleporting.",
+    "OSINT = publicly available information ONLY — not classified sources.",
+    "Juice jacking (malicious charging cable) and MITM (public WiFi) are physical/local attack vectors.",
+  ]
+};
+
+// ============================================================
+// FINAL EXAM DATA
+// ============================================================
+const EXAM_DATA = {
+  mcq:[
+    {q:"What is the standard value of the damping factor 'd' in PageRank and TrustRank?",opts:["0.5","0.75","0.85","0.95"],correct:2},
+    {q:"Which type of social media data is considered MOST valuable to advertisers because it reveals genuine interest?",opts:["Posted photos","Public status updates","Dwell time (watching without interacting)","Number of followers"],correct:2},
+    {q:"What does OSINT stand for?",opts:["Online Security Intelligence Network","Open Source Intelligence","Operational System Internet Network","Organized Social Information Tracking"],correct:1},
+    {q:"In a Sybil attack, where does 'Inherited Social Trust' occur?",opts:["At the Source Node","At the First Hop","At the Second Hop","At the platform's server"],correct:2},
+    {q:"What is the Levenshtein distance between 'fly' and 'f1y'?",opts:["0","1","2","3"],correct:1},
+    {q:"In TrustRank, the random browser teleports to:",opts:["Any random page","The most linked page","A page from the trusted seed set","The highest PageRank page"],correct:2},
+    {q:"Which security threat involves malware that locks a device until payment is made?",opts:["Spyware","Adware","Ransomware","Rootkit"],correct:2},
+    {q:"What does L(q) represent in the PageRank formula?",opts:["Number of inbound links to q","Trust score of q","Number of outbound links from q","The damping factor"],correct:2},
+    {q:"Which photo analysis technique uses shadow angles to determine when a photo was taken?",opts:["EXIF analysis","Chronolocation (Shadow Analysis)","Facial recognition","Metadata stripping"],correct:1},
+    {q:"Credential stuffing works because users:",opts:["Use complex passwords","Reuse the same password across multiple platforms","Enable two-factor authentication","Use password managers"],correct:1},
+  ],
+  tf:[
+    {s:"TrustRank scores sum to exactly 1 because they form a probability distribution.",correct:true},
+    {s:"The clustering coefficient is HIGH in fake social networks.",correct:false},
+    {s:"EXIF data contains GPS coordinates, timestamp, and device model.",correct:true},
+    {s:"In TrustRank initialization, ALL pages start with a trust score of 1.",correct:false},
+    {s:"A VPN protects against Man-in-the-Middle attacks on public Wi-Fi.",correct:true},
+    {s:"The similarity formula for Levenshtein distance is: 1 - D(S,T)/max(|S|,|T|).",correct:true},
+    {s:"LinkedIn is classified as a Media Sharing Network.",correct:false},
+    {s:"Juice jacking occurs when malware is installed via a malicious USB charging cable.",correct:true},
+    {s:"PageRank and TrustRank use the same teleportation mechanism.",correct:false},
+    {s:"Behavioral data (likes, clicks, time on content) is one of the six types of data collected by social media.",correct:true},
+  ],
+  ps:{
+    title:"TrustRank Problem",
+    prob:"Graph: A (seed) → B, A → C, B → C, C → A. Seed set S = {A}, d = 0.85. Compute T₁(p) for all pages using TrustRank. Verify the sum = 1.",
+    answer:`
+T₀: T(A)=1, T(B)=0, T(C)=0 | L(A)=2, L(B)=1, L(C)=1<br><br>
+<strong>T₁(A)</strong> = (1-0.85)×1 + 0.85×(T₀(C)/L(C)) = 0.15 + 0.85×(0/1) = <strong>0.15</strong><br>
+<strong>T₁(B)</strong> = 0 + 0.85×(T₀(A)/L(A)) = 0.85×(1/2) = <strong>0.425</strong><br>
+<strong>T₁(C)</strong> = 0 + 0.85×(T₀(A)/L(A)+T₀(B)/L(B)) = 0.85×(0.5+0) = <strong>0.425</strong><br><br>
+Sum = 0.15 + 0.425 + 0.425 = <strong>1.0 ✓</strong><br><br>
+Discussion: B and C tie as highest trust (0.425) because both receive direct trust from seed A. A's own score drops to 0.15 because C (which links back to A) had 0 trust in iteration 0.`
+  },
+  theory:{
+    title:"Explain Question",
+    q:"Compare PageRank and TrustRank. Why was TrustRank developed? (5 marks)",
+    answer:`<strong>PageRank (2 marks):</strong> A link analysis algorithm measuring page importance. A link from page i to j is a vote; more important pages' votes carry more weight. Teleport set = entire web. Formula: PR(p) = (1-d)/N + d·Σ[PR(q)/L(q)].<br><br><strong>TrustRank (2 marks):</strong> Modifies PageRank so the teleport set is ONLY manually selected trusted seed pages S. The random browser always returns to a seed, never to a random page. Formula: T(p) = (1-d)·[1(p∈S)/|S|] + d·Σ[T(q)/L(q)].<br><br><strong>Why TrustRank was developed (1 mark):</strong> PageRank is vulnerable to manipulation by spam link farms (pages that link to each other to inflate rank). TrustRank combats this by anchoring trust in verified sources — good pages link little to bad ones, so trust crumbles with distance from seeds.`
+  }
+};
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+let mcqAnswered=0, mcqCorrect=0, tfAnswered=0, tfCorrect=0;
+let examStarted=false, examTimer=null, examSeconds=3600;
+let examMCQAnswers={}, examTFAnswers={};
+let totalInteracted=0;
+
+function renderMCQ(){
+  const c=document.getElementById('mcq-container');
+  c.innerHTML=MCQ_DATA.map((q,i)=>`
+    <div class="card" id="mcq-card-${i}" data-searchable="${q.q} ${q.opts.join(' ')}">
+      <span class="q-num">Q${i+1} of ${MCQ_DATA.length}</span>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,j)=>`
+          <div class="opt" id="mcq-opt-${i}-${j}" onclick="answerMCQ(${i},${j})">
+            <span class="opt-letter">${['A','B','C','D'][j]}</span>${o}
+          </div>`).join('')}
+      </div>
+      <div class="explanation" id="mcq-exp-${i}"><strong>Explanation:</strong> ${q.exp}</div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="toggleExplanation('mcq-exp-${i}')">💡 Explanation</button>
+      </div>
+    </div>`).join('');
+}
+
+function answerMCQ(qi,oi){
+  const card=document.getElementById(`mcq-card-${qi}`);
+  if(card.dataset.answered) return;
+  card.dataset.answered='1';
+  const q=MCQ_DATA[qi];
+  for(let j=0;j<4;j++){
+    const opt=document.getElementById(`mcq-opt-${qi}-${j}`);
+    if(j===q.correct) opt.classList.add('correct');
+    else if(j===oi && j!==q.correct) opt.classList.add('wrong');
+    opt.style.pointerEvents='none';
+  }
+  document.getElementById(`mcq-exp-${qi}`).classList.add('show');
+  mcqAnswered++;
+  if(oi===q.correct) mcqCorrect++;
+  document.getElementById('mcqScore').textContent=`Score: ${mcqCorrect}/${mcqAnswered}`;
+  updateProgress();
+}
+
+function renderTF(){
+  const c=document.getElementById('tf-container');
+  c.innerHTML=TF_DATA.map((q,i)=>`
+    <div class="card tf-card" id="tf-card-${i}" data-searchable="${q.s}">
+      <span class="q-num">TF${i+1}</span>
+      <div class="q-text">${q.s}</div>
+      <div class="tf-btns">
+        <button class="tf-btn t" onclick="answerTF(${i},true)">✓ TRUE</button>
+        <button class="tf-btn f" onclick="answerTF(${i},false)">✗ FALSE</button>
+      </div>
+      <div class="explanation" id="tf-exp-${i}"><strong>${q.correct?'TRUE ✓':'FALSE ✗'}  —  Explanation:</strong> ${q.exp}</div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="toggleExplanation('tf-exp-${i}')">💡 Explanation</button>
+      </div>
+    </div>`).join('');
+}
+
+function answerTF(qi,ans){
+  const card=document.getElementById(`tf-card-${qi}`);
+  if(card.dataset.answered) return;
+  card.dataset.answered='1';
+  const q=TF_DATA[qi];
+  const btns=card.querySelectorAll('.tf-btn');
+  const isCorrect=(ans===q.correct);
+  btns[0].classList.add(q.correct?'correct':(ans===true?'wrong':''));
+  btns[1].classList.add(!q.correct?'correct':(ans===false?'wrong':''));
+  btns[0].disabled=btns[1].disabled=true;
+  document.getElementById(`tf-exp-${qi}`).classList.add('show');
+  tfAnswered++;
+  if(isCorrect) tfCorrect++;
+  document.getElementById('tfScore').textContent=`Score: ${tfCorrect}/${tfAnswered}`;
+  updateProgress();
+}
+
+function renderPS(){
+  const c=document.getElementById('ps-container');
+  c.innerHTML=PS_DATA.map((p,i)=>`
+    <div class="card">
+      <span class="q-num">Problem ${i+1}</span>
+      <h3 style="color:var(--accent);font-family:'Syne',sans-serif;margin-bottom:8px;">${p.title}</h3>
+      <div class="q-text">${p.prob}</div>
+      <div class="formula-box">📐 Formulas Used:<br>${p.formula.split('\n').join('<br>')}</div>
+      <button class="btn btn-primary" onclick="toggleSolution('sol-${i}',this)">👁 Show Solution</button>
+      <div class="solution-reveal" id="sol-${i}">
+        <div class="sdiv">Step-by-Step Solution</div>
+        ${p.steps.map(s=>`
+          <div class="step">
+            <div class="step-num">${s.n}</div>
+            <div class="step-content"><strong>${s.t}:</strong> ${s.c}</div>
+          </div>`).join('')}
+        ${p.table?`
+          <div class="sdiv">Summary Table</div>
+          <table>
+            <tr>${p.table.headers.map(h=>`<th>${h}</th>`).join('')}</tr>
+            ${p.table.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}
+          </table>`:''
+        }
+      </div>
+    </div>`).join('');
+}
+
+function renderTheory(){
+  const c=document.getElementById('theory-container');
+  c.innerHTML=THEORY_DATA.map((q,i)=>`
+    <div class="card theory-card" data-searchable="${q.q}">
+      <span class="q-num">Theory Q${i+1}</span>
+      <h4>${q.q}</h4>
+      <button class="btn btn-outline" onclick="toggleAnswer('th-${i}',this)">📋 Show Model Answer</button>
+      <div class="theory-answer" id="th-${i}">${q.a}</div>
+    </div>`).join('');
+}
+
+function renderRevision(){
+  const c=document.getElementById('revision-container');
+  const {formulas,notes,exam_tips}=REVISION_DATA;
+  c.innerHTML=`
+    <div class="two-col">
+      <div class="card">
+        <span class="q-num">FORMULAS</span>
+        <h3 style="color:var(--accent);font-family:'Syne',sans-serif;margin-bottom:12px;">⚡ Key Formulas</h3>
+        ${formulas.map(f=>`<div class="formula-chip">${f}</div>`).join('')}
+      </div>
+      <div class="card">
+        <span class="q-num">EXAM TIPS</span>
+        <h3 style="color:var(--accent4);font-family:'Syne',sans-serif;margin-bottom:12px;">💡 Exam Tips</h3>
+        ${exam_tips.map(t=>`<div class="key-note"><div class="dot" style="background:var(--accent4)"></div><span>${t}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <span class="q-num">KEY NOTES</span>
+      <h3 style="color:var(--accent3);font-family:'Syne',sans-serif;margin-bottom:14px;">📌 Frequently Tested Concepts</h3>
+      ${notes.map(n=>`
+        <div class="key-note">
+          <div class="dot" style="background:${n.hot?'var(--danger)':'var(--accent3)'}"></div>
+          <div>
+            <strong>${n.t}</strong>${n.hot?'<span class="tag tag-red">HOT</span>':''}<br>
+            <span style="color:var(--text2);font-size:0.88rem;">${n.c}</span>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderExam(){
+  const c=document.getElementById('exam-container');
+  c.innerHTML=`
+    <div class="sdiv">Section 1: Multiple Choice Questions (10 × 1 = 10 marks)</div>
+    ${EXAM_DATA.mcq.map((q,i)=>`
+      <div class="card" id="eq-mcq-${i}">
+        <span class="q-num">Q${i+1}</span>
+        <div class="q-text">${q.q}</div>
+        <div class="options">
+          ${q.opts.map((o,j)=>`
+            <div class="opt" id="eq-opt-${i}-${j}" onclick="examMCQ(${i},${j})">
+              <span class="opt-letter">${['A','B','C','D'][j]}</span>${o}
+            </div>`).join('')}
+        </div>
+      </div>`).join('')}
+    
+    <div class="sdiv">Section 2: True / False (10 × 2 = 20 marks)</div>
+    ${EXAM_DATA.tf.map((q,i)=>`
+      <div class="card" id="eq-tf-${i}">
+        <span class="q-num">TF${i+1}</span>
+        <div class="q-text">${q.s}</div>
+        <div class="tf-btns">
+          <button class="tf-btn t" id="eq-t-${i}" onclick="examTF(${i},true)">✓ TRUE</button>
+          <button class="tf-btn f" id="eq-f-${i}" onclick="examTF(${i},false)">✗ FALSE</button>
+        </div>
+      </div>`).join('')}
+    
+    <div class="sdiv">Section 3: Problem Solving (10 marks)</div>
+    <div class="card">
+      <span class="q-num">PS1 — 10 marks</span>
+      <div class="q-text"><strong>${EXAM_DATA.ps.prob}</strong></div>
+      <div class="formula-box">T(p) = (1-d)·[1(p∈S)/|S|] + d·Σ[T(q)/L(q)] | d = 0.85 | Initial T: T₀(seed)=1, others=0</div>
+      <textarea id="exam-ps-ans" rows="6" placeholder="Write your solution here..." 
+        style="width:100%;margin-top:10px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.9rem;resize:vertical;font-family:'DM Sans',sans-serif;outline:none;"></textarea>
+    </div>
+    
+    <div class="sdiv">Section 4: Theory Question (10 marks)</div>
+    <div class="card">
+      <span class="q-num">TH1 — 10 marks</span>
+      <div class="q-text"><strong>${EXAM_DATA.theory.q}</strong></div>
+      <textarea id="exam-th-ans" rows="8" placeholder="Write your answer here..." 
+        style="width:100%;margin-top:10px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.9rem;resize:vertical;font-family:'DM Sans',sans-serif;outline:none;"></textarea>
+    </div>`;
+}
+
+// ============================================================
+// EXAM LOGIC
+// ============================================================
+function startExam(){
+  examStarted=true;
+  examSeconds=3600;
+  document.getElementById('startExamBtn').style.display='none';
+  document.getElementById('submitExamBtn').style.display='inline-flex';
+  examTimer=setInterval(()=>{
+    examSeconds--;
+    const m=Math.floor(examSeconds/60), s=examSeconds%60;
+    document.getElementById('timer').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(examSeconds<=300) document.getElementById('timer').classList.add('urgent');
+    if(examSeconds<=0){ clearInterval(examTimer); submitExam(); }
+  },1000);
+  showToast("⏱️ Exam started! Good luck!");
+}
+
+function examMCQ(qi,oi){
+  if(!examStarted) return showToast("⚠️ Click 'Start Exam' first!");
+  const card=document.getElementById(`eq-mcq-${qi}`);
+  if(card.dataset.answered) return;
+  for(let j=0;j<4;j++) document.getElementById(`eq-opt-${qi}-${j}`).classList.remove('selected');
+  document.getElementById(`eq-opt-${qi}-${oi}`).classList.add('selected');
+  examMCQAnswers[qi]=oi;
+}
+
+function examTF(qi,ans){
+  if(!examStarted) return showToast("⚠️ Click 'Start Exam' first!");
+  const tb=document.getElementById(`eq-t-${qi}`);
+  const fb=document.getElementById(`eq-f-${qi}`);
+  tb.classList.remove('selected'); fb.classList.remove('selected');
+  (ans?tb:fb).classList.add('selected');
+  examTFAnswers[qi]=ans;
+}
+
+function submitExam(){
+  if(examTimer) clearInterval(examTimer);
+  let mcqScore=0, tfScore=0;
+  EXAM_DATA.mcq.forEach((q,i)=>{ if(examMCQAnswers[i]===q.correct) mcqScore++; });
+  EXAM_DATA.tf.forEach((q,i)=>{ if(examTFAnswers[i]===q.correct) tfScore++; });
+  const psScore=5, thScore=5; // assumed half marks if answered
+  const total=mcqScore + (tfScore*2) + psScore + thScore;
+  
+  const summary=document.getElementById('score-summary');
+  document.getElementById('finalScore').textContent=`${total}/50`;
+  document.getElementById('scoreBreakdown').innerHTML=`
+    <div class="score-item"><div class="sv" style="color:var(--accent)">${mcqScore}/10</div><div class="sl">MCQ</div></div>
+    <div class="score-item"><div class="sv" style="color:var(--accent3)">${tfScore*2}/20</div><div class="sl">True/False</div></div>
+    <div class="score-item"><div class="sv" style="color:var(--accent4)">${psScore}/10</div><div class="sl">Problem</div></div>
+    <div class="score-item"><div class="sv" style="color:var(--accent2)">${thScore}/10</div><div class="sl">Theory</div></div>
+  `;
+  summary.classList.add('show');
+  summary.scrollIntoView({behavior:'smooth'});
+  document.getElementById('submitExamBtn').style.display='none';
+  document.getElementById('startExamBtn').style.display='inline-flex';
+  document.getElementById('startExamBtn').textContent='🔄 Retake';
+}
+
+function showAnswerKey(){
+  const ak=document.getElementById('answer-key');
+  if(ak.classList.contains('show')){ ak.classList.remove('show'); return; }
+  ak.innerHTML=`
+    <h3>📋 Complete Answer Key</h3>
+    
+    <div class="sdiv">Section 1 — MCQ Answers</div>
+    <div class="ak-grid">
+      ${EXAM_DATA.mcq.map((q,i)=>`
+        <div class="ak-item">
+          <div class="qn">MCQ ${i+1}</div>
+          <div class="ans">${['A','B','C','D'][q.correct]}</div>
+          <div style="font-size:0.7rem;color:var(--text3);">${q.opts[q.correct].substring(0,20)}...</div>
+        </div>`).join('')}
+    </div>
+    
+    <div class="sdiv" style="margin-top:16px;">Section 2 — True/False Answers</div>
+    <div class="ak-grid">
+      ${EXAM_DATA.tf.map((q,i)=>`
+        <div class="ak-item">
+          <div class="qn">TF ${i+1}</div>
+          <div class="ans" style="color:${q.correct?'var(--correct)':'var(--wrong)'}">${q.correct?'TRUE':'FALSE'}</div>
+        </div>`).join('')}
+    </div>
+    
+    <div class="sdiv" style="margin-top:16px;">Section 3 — Problem Solving Model Answer</div>
+    <div class="card" style="margin-top:8px;">
+      <div class="q-text">${EXAM_DATA.ps.title||'TrustRank Solution'}</div>
+      <div style="font-size:0.9rem;color:var(--text2);line-height:1.7;">${EXAM_DATA.ps.answer}</div>
+    </div>
+    
+    <div class="sdiv" style="margin-top:16px;">Section 4 — Theory Model Answer</div>
+    <div class="card" style="margin-top:8px;">
+      <div style="font-size:0.9rem;color:var(--text2);line-height:1.7;">${EXAM_DATA.theory.answer}</div>
+    </div>`;
+  ak.classList.add('show');
+  ak.scrollIntoView({behavior:'smooth'});
+}
+
+function resetExam(){
+  examStarted=false; examMCQAnswers={}; examTFAnswers={};
+  if(examTimer) clearInterval(examTimer);
+  document.getElementById('timer').textContent='60:00';
+  document.getElementById('timer').classList.remove('urgent');
+  document.getElementById('score-summary').classList.remove('show');
+  document.getElementById('answer-key').classList.remove('show');
+  document.getElementById('startExamBtn').style.display='inline-flex';
+  document.getElementById('startExamBtn').textContent='▶ Start Exam';
+  document.getElementById('submitExamBtn').style.display='none';
+  renderExam();
+  showToast("🔄 Exam reset — ready to retake!");
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function toggleSolution(id,btn){
+  const el=document.getElementById(id);
+  const show=el.classList.toggle('show');
+  btn.textContent=show?'🙈 Hide Solution':'👁 Show Solution';
+}
+function toggleExplanation(id){
+  document.getElementById(id).classList.toggle('show');
+}
+function toggleAnswer(id,btn){
+  const el=document.getElementById(id);
+  const show=el.classList.toggle('show');
+  btn.textContent=show?'🙈 Hide Answer':'📋 Show Model Answer';
+}
+function toggleAllExplanations(container){
+  const exps=document.getElementById(container).querySelectorAll('.explanation');
+  const anyHidden=[...exps].some(e=>!e.classList.contains('show'));
+  exps.forEach(e=>e.classList.toggle('show',anyHidden));
+}
+function toggleAllAnswers(){
+  const as=document.getElementById('theory-container').querySelectorAll('.theory-answer');
+  const anyHidden=[...as].some(e=>!e.classList.contains('show'));
+  as.forEach(e=>e.classList.toggle('show',anyHidden));
+  document.getElementById('theory-container').querySelectorAll('button').forEach(b=>{
+    b.textContent=anyHidden?'🙈 Hide Answer':'📋 Show Model Answer';
+  });
+}
+function resetSection(container,scoreId){
+  document.getElementById(container).querySelectorAll('.card').forEach(c=>{
+    delete c.dataset.answered;
+    c.querySelectorAll('.opt').forEach(o=>{o.classList.remove('correct','wrong','selected');o.style.pointerEvents='';});
+    c.querySelectorAll('.explanation').forEach(e=>e.classList.remove('show'));
+  });
+  mcqAnswered=0; mcqCorrect=0;
+  document.getElementById(scoreId).textContent='Score: 0/0';
+  showToast("🔄 Section reset!");
+}
+function resetTF(){
+  document.getElementById('tf-container').querySelectorAll('.card').forEach(c=>{
+    delete c.dataset.answered;
+    c.querySelectorAll('.tf-btn').forEach(b=>{b.classList.remove('correct','wrong','selected');b.disabled=false;});
+    c.querySelectorAll('.explanation').forEach(e=>e.classList.remove('show'));
+  });
+  tfAnswered=0; tfCorrect=0;
+  document.getElementById('tfScore').textContent='Score: 0/0';
+  showToast("🔄 T/F reset!");
+}
+
+function updateProgress(){
+  const total=MCQ_DATA.length+TF_DATA.length;
+  const done=mcqAnswered+tfAnswered;
+  const pct=Math.round((done/total)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'%';
+}
+
+function showSection(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#mainNav button').forEach((b,i)=>{
+    b.classList.remove('active');
+    const ids=['mcq','tf','ps','theory','revision','exam'];
+    if(ids[i]===id) b.classList.add('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function doSearch(val){
+  const q=val.toLowerCase().trim();
+  document.querySelectorAll('[data-searchable]').forEach(card=>{
+    const text=card.dataset.searchable.toLowerCase();
+    if(!q||text.includes(q)) card.classList.remove('hidden-q');
+    else card.classList.add('hidden-q');
+  });
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded',()=>{
+  renderMCQ();
+  renderTF();
+  renderPS();
+  renderTheory();
+  renderRevision();
+  renderExam();
+});
+</script>
+</body>
+</html>
